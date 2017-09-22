@@ -50,6 +50,44 @@ This page will be invoked via redirect from the Authorization server at the conc
 
 The other content you see in the source folder is the site for this tutorial. We used <a href="https://github.com/lord/slate" target="_blank">Slate</a> to create the documentation for this tutorial.
 
+# MPages® Integration
+
+MPages® is a Web-based platform that enables clients to create customized views of Cerner Millennium® data at the organizer or chart level from within Cerner PowerChart®, FirstNet®, INet® and SurgiNet®.
+
+There are a few different files and HTML tags you need to add to each view within your application to securely embed the SMART App within 
+an MPage® view. We've already 
+set this up in the example app, so there's no work needed in this step.
+
+>index.html - launch.html - health.html
+
+```html
+<html hidden>
+  <head>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge' />
+    ...
+    <link rel='stylesheet' type='text/css' href='./lib/css/cerner-smart-embeddable-lib-[version].min.css'>
+    ...
+```
+
+```html
+  <body>
+    ...
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/babel-polyfill/6.26.0/polyfill.min.js'></script>
+    <script src='./lib/js/cerner-smart-embeddable-lib-[version].min.js'></script>
+    ...
+```
+
+
+- Include the `hidden` attribute to the `html` tag.
+- Set a `meta` tag at the top of the `head` tag to display Internet Explorer content in the highest compatibility mode.
+- Include the `babel-polyfill` module into the project to support ES2015+ JavaScript standard methods and Objects that this project (and included libraries) may use.
+- Include the `cerner-smart-embeddable-lib` files that utilize the [Cerner XFC](https://github.com/cerner/xfc) (Cross-Frame-Container) library to prevent possible [Clickjacking
+attacks](https://www.owasp.org/index.php/Clickjacking) in any browser. These files can be pulled in from the [Cerner SMART Embeddable Library](https://github.com/cerner/cerner-smart-embeddable-lib). See project
+description for how to properly size the application, and note additional considerations around conflicting HTTP headers.
+
+Note: The steps above only ensure that the application will meet certain prerequisites to securely embed a SMART app within an MPage® view.
+Once these relevant files and HTML tags are included inside each view of the app, then the application should be ready for SMART in MPage® integration.  
+
 # GitHub Pages
 
 >index.html
